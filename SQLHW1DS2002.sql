@@ -1,0 +1,12 @@
+USE northwind;
+SELECT Count(product_name) FROM products;
+SELECT product_name, quantity_per_unit FROM products;
+SELECT id, product_name FROM Products WHERE Discontinued = "False"  ORDER BY product_name;
+SELECT id, product_name FROM Products WHERE Discontinued = "True" ORDER BY product_name;
+SELECT product_name, list_price FROM Products ORDER BY list_price DESC;
+SELECT id, product_name, list_price FROM Products WHERE list_price<20 ORDER BY list_price DESC; 
+SELECT id, product_name, list_price FROM Products WHERE ((list_price>=15 AND list_price<=20)) ORDER BY list_price DESC;
+SELECT DISTINCT product_name, list_Price FROM Products WHERE list_price > (SELECT avg(list_price) FROM products) ORDER BY list_price;
+SELECT DISTINCT product_name as Ten_Most_Expensive_Products, list_price FROM Products AS a WHERE 10 >=(SELECT COUNT(DISTINCT list_price) FROM products AS b WHERE b.list_price >= a.list_price) ORDER BY list_price DESC;
+SELECT Count(product_name) FROM Products GROUP BY discontinued;
+SELECT product_name, target_level, reorder_level FROM Products WHERE (((discontinued) = False) and ((reorder_level)<target_level));
